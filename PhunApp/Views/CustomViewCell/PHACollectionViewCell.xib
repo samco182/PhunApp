@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Meeting Cell" id="gTV-IL-0wX" customClass="PHACollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="226" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="226" height="160"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5nK-Vp-O48"/>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBu-DV-j7G">
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v2Z-DE-5jk">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uVF-jU-SO0">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xds-sa-wLm">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-mq-Caf">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMD-x8-rCQ">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKg-C7-SlN">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uVF-jU-SO0" firstAttribute="width" secondItem="v2Z-DE-5jk" secondAttribute="width" id="n5e-jU-8DY"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="v2Z-DE-5jk" secondAttribute="bottom" constant="20" symbolic="YES" id="IuZ-oY-S5T"/>
+                            <constraint firstAttribute="trailing" secondItem="v2Z-DE-5jk" secondAttribute="trailing" constant="20" symbolic="YES" id="QFz-IG-rbQ"/>
+                            <constraint firstItem="v2Z-DE-5jk" firstAttribute="top" secondItem="ZBu-DV-j7G" secondAttribute="top" constant="20" symbolic="YES" id="QKl-EZ-5pL"/>
+                            <constraint firstItem="v2Z-DE-5jk" firstAttribute="leading" secondItem="ZBu-DV-j7G" secondAttribute="leading" constant="20" symbolic="YES" id="bt6-hI-DCN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5nK-Vp-O48" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0ei-xZ-h64"/>
+                <constraint firstItem="ZBu-DV-j7G" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Fvi-P2-qF1"/>
+                <constraint firstAttribute="trailing" secondItem="ZBu-DV-j7G" secondAttribute="trailing" id="G0D-pL-Fy0"/>
+                <constraint firstAttribute="bottom" secondItem="5nK-Vp-O48" secondAttribute="bottom" id="IgQ-8s-j22"/>
+                <constraint firstAttribute="bottom" secondItem="ZBu-DV-j7G" secondAttribute="bottom" id="JPm-HL-BVB"/>
+                <constraint firstItem="ZBu-DV-j7G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KKV-mY-yMn"/>
+                <constraint firstItem="5nK-Vp-O48" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Lgo-7V-Dw5"/>
+                <constraint firstAttribute="trailing" secondItem="5nK-Vp-O48" secondAttribute="trailing" id="hpY-QD-m7L"/>
+            </constraints>
+            <size key="customSize" width="175" height="88"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="5nK-Vp-O48" id="uSH-Sp-oDK"/>
+                <outlet property="dateTextLabel" destination="Xds-sa-wLm" id="SyM-8B-QGo"/>
+                <outlet property="meetingPlaceTextLabel" destination="uMD-x8-rCQ" id="KOL-7o-Okc"/>
+                <outlet property="shortDescriptionTextLabel" destination="jKg-C7-SlN" id="JXr-4m-dxc"/>
+                <outlet property="titleTextLabel" destination="u3R-mq-Caf" id="XiJ-Hx-EGq"/>
+            </connections>
+            <point key="canvasLocation" x="96" y="76"/>
+        </collectionViewCell>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pEn-5o-1IB">
+            <rect key="frame" x="0.0" y="0.0" width="36" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+        </label>
+    </objects>
+</document>

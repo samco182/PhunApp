@@ -16,6 +16,10 @@
 		4A14E0191DC83FFB0071E445 /* PhunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0181DC83FFB0071E445 /* PhunAppTests.m */; };
 		4A14E0241DC83FFB0071E445 /* PhunAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0231DC83FFB0071E445 /* PhunAppUITests.m */; };
 		4A14E0341DC84D010071E445 /* PHADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0331DC84D010071E445 /* PHADataFetcher.m */; };
+		4A14E0381DC85BEF0071E445 /* PHAHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A14E0371DC85BEF0071E445 /* PHAHome.storyboard */; };
+		4A14E03B1DC85C370071E445 /* PHAHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E03A1DC85C370071E445 /* PHAHomeCollectionViewController.m */; };
+		4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E03E1DC85CEA0071E445 /* PHACollectionViewCell.m */; };
+		4A14E0411DC85CEA0071E445 /* PHACollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */; };
 		54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +60,12 @@
 		4A14E0251DC83FFB0071E445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A14E0321DC84D010071E445 /* PHADataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHADataFetcher.h; path = Network/PHADataFetcher.h; sourceTree = "<group>"; };
 		4A14E0331DC84D010071E445 /* PHADataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHADataFetcher.m; path = Network/PHADataFetcher.m; sourceTree = "<group>"; };
+		4A14E0371DC85BEF0071E445 /* PHAHome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PHAHome.storyboard; path = Views/Home/PHAHome.storyboard; sourceTree = "<group>"; };
+		4A14E0391DC85C370071E445 /* PHAHomeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHAHomeCollectionViewController.h; path = Views/Home/PHAHomeCollectionViewController.h; sourceTree = "<group>"; };
+		4A14E03A1DC85C370071E445 /* PHAHomeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAHomeCollectionViewController.m; path = Views/Home/PHAHomeCollectionViewController.m; sourceTree = "<group>"; };
+		4A14E03D1DC85CEA0071E445 /* PHACollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHACollectionViewCell.h; path = Views/CustomViewCell/PHACollectionViewCell.h; sourceTree = "<group>"; };
+		4A14E03E1DC85CEA0071E445 /* PHACollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHACollectionViewCell.m; path = Views/CustomViewCell/PHACollectionViewCell.m; sourceTree = "<group>"; };
+		4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PHACollectionViewCell.xib; path = Views/CustomViewCell/PHACollectionViewCell.xib; sourceTree = "<group>"; };
 		C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhunApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6E891A30095303C60CED9D /* Pods-PhunApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhunApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhunApp/Pods-PhunApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +121,7 @@
 		4A14DFFD1DC83FFB0071E445 /* PhunApp */ = {
 			isa = PBXGroup;
 			children = (
+				4A14E0351DC85B870071E445 /* Views */,
 				4A14E0311DC84C8F0071E445 /* Network */,
 				4A14E0011DC83FFB0071E445 /* AppDelegate.h */,
 				4A14E0021DC83FFB0071E445 /* AppDelegate.m */,
@@ -158,6 +169,35 @@
 				4A14E0331DC84D010071E445 /* PHADataFetcher.m */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		4A14E0351DC85B870071E445 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E03C1DC85C9F0071E445 /* CustomViewCell */,
+				4A14E0361DC85BBF0071E445 /* Home */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4A14E0361DC85BBF0071E445 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E0391DC85C370071E445 /* PHAHomeCollectionViewController.h */,
+				4A14E03A1DC85C370071E445 /* PHAHomeCollectionViewController.m */,
+				4A14E0371DC85BEF0071E445 /* PHAHome.storyboard */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		4A14E03C1DC85C9F0071E445 /* CustomViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E03D1DC85CEA0071E445 /* PHACollectionViewCell.h */,
+				4A14E03E1DC85CEA0071E445 /* PHACollectionViewCell.m */,
+				4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */,
+			);
+			name = CustomViewCell;
 			sourceTree = "<group>";
 		};
 		5A8FE5560F6F55DEE2867C64 /* Pods */ = {
@@ -287,9 +327,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A14E0411DC85CEA0071E445 /* PHACollectionViewCell.xib in Resources */,
 				4A14E00E1DC83FFB0071E445 /* LaunchScreen.storyboard in Resources */,
 				4A14E00B1DC83FFB0071E445 /* Assets.xcassets in Resources */,
 				4A14E0091DC83FFB0071E445 /* Main.storyboard in Resources */,
+				4A14E0381DC85BEF0071E445 /* PHAHome.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,8 +404,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */,
 				4A14E0061DC83FFB0071E445 /* ViewController.m in Sources */,
 				4A14E0031DC83FFB0071E445 /* AppDelegate.m in Sources */,
+				4A14E03B1DC85C370071E445 /* PHAHomeCollectionViewController.m in Sources */,
 				4A14E0001DC83FFB0071E445 /* main.m in Sources */,
 				4A14E0341DC84D010071E445 /* PHADataFetcher.m in Sources */,
 			);
