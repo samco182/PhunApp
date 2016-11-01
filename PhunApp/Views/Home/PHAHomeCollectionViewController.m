@@ -8,7 +8,9 @@
 
 #import <Realm/RLMRealm.h>
 #import <Realm/RLMResults.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "PHAHomeCollectionViewController.h"
+#import "PHACollectionViewCell.h"
 #import "PHADataFetcher.h"
 #import "PHAEventStoring.h"
 #import "PHAEvent.h"
@@ -66,14 +68,23 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+    return self.events.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    PHACollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // Configure the cell
+    PHAEventStoring *event = [self.events objectAtIndex:indexPath.row];
+    [cell.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:event.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.titleTextLabel.text = event.eventTitle;
+    cell.dateTextLabel.text = [[self dateFormatter] stringFromDate:event.eventDate];
+    cell.shortDescriptionTextLabel.text = [([event.eventDescription componentsSeparatedByString:@"."])[0] stringByAppendingString:@"."];
+    if (event.locationTwo) {
+        cell.meetingPlaceTextLabel.text = [NSString stringWithFormat:@"%@, %@", event.locationOne, event.locationTwo];
+    } else {
+        cell.meetingPlaceTextLabel.text = event.locationOne;
+    }
+    
     
     return cell;
 }
@@ -86,7 +97,7 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
     
     CGFloat widthPerItem = self.view.frame.size.width / self.itemsPerRow;
     
-    return CGSizeMake(widthPerItem, widthPerItem * 0.5);
+    return CGSizeMake(widthPerItem, widthPerItem * 0.45);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
@@ -114,6 +125,14 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
  */
 
 #pragma mark - Helper Methods
+
+- (NSDateFormatter *)dateFormatter {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm a"];;
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    
+    return dateFormatter;
+}
 
 - (void)orientationChanged:(NSNotification *)notification {
     [self getItemsPerRow];
