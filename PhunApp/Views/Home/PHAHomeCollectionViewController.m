@@ -11,6 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PHAHomeCollectionViewController.h"
 #import "PHACollectionViewCell.h"
+#import "PHADetailViewController.h"
 #import "PHADataFetcher.h"
 #import "PHAEventStoring.h"
 #import "PHAEvent.h"
@@ -114,16 +115,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsZero.left;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 #pragma mark - Helper Methods
 
 - (NSDateFormatter *)dateFormatter {
@@ -182,6 +173,23 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                self.events = [PHAEventStoring allObjects];
                                [self.collectionView reloadData];
                            }];
+}
+
+#pragma mark - Navigation
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *tappedCell = [collectionView cellForItemAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"Show Details" sender:tappedCell];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[PHACollectionViewCell class]]) {
+        NSIndexPath *selectedCell = [self.collectionView indexPathForCell:sender];
+        if ([segue.destinationViewController isKindOfClass:[PHADetailViewController class]]) {
+            PHADetailViewController *detailViewController = (PHADetailViewController *)segue.destinationViewController;
+            detailViewController.eventToDisplay = [self.events objectAtIndex:selectedCell.row];
+        }
+    }
 }
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PHAEventStoring.h"
 
 @interface PHADetailViewController : UIViewController
+
+@property (strong, nonatomic) PHAEventStoring *eventToDisplay;
 
 @end
