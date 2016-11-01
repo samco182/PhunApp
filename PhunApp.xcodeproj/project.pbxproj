@@ -24,6 +24,7 @@
 		4A14E0471DC8658B0071E445 /* PHADetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0461DC8658B0071E445 /* PHADetailViewController.m */; };
 		4A14E04B1DC875200071E445 /* PHAEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E04A1DC875200071E445 /* PHAEvent.m */; };
 		4A14E04E1DC87F660071E445 /* PHAEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E04D1DC87F660071E445 /* PHAEventList.m */; };
+		4A14E0511DC899A90071E445 /* PHAEventStoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0501DC899A90071E445 /* PHAEventStoring.m */; };
 		54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		4A14E04A1DC875200071E445 /* PHAEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAEvent.m; path = Model/PHAEvent.m; sourceTree = "<group>"; };
 		4A14E04C1DC87F660071E445 /* PHAEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHAEventList.h; path = Model/PHAEventList.h; sourceTree = "<group>"; };
 		4A14E04D1DC87F660071E445 /* PHAEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAEventList.m; path = Model/PHAEventList.m; sourceTree = "<group>"; };
+		4A14E04F1DC899A90071E445 /* PHAEventStoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHAEventStoring.h; path = Model/PHAEventStoring.h; sourceTree = "<group>"; };
+		4A14E0501DC899A90071E445 /* PHAEventStoring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAEventStoring.m; path = Model/PHAEventStoring.m; sourceTree = "<group>"; };
 		C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhunApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6E891A30095303C60CED9D /* Pods-PhunApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhunApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhunApp/Pods-PhunApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +233,8 @@
 				4A14E04A1DC875200071E445 /* PHAEvent.m */,
 				4A14E04C1DC87F660071E445 /* PHAEventList.h */,
 				4A14E04D1DC87F660071E445 /* PHAEventList.m */,
+				4A14E04F1DC899A90071E445 /* PHAEventStoring.h */,
+				4A14E0501DC899A90071E445 /* PHAEventStoring.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A14E04B1DC875200071E445 /* PHAEvent.m in Sources */,
+				4A14E0511DC899A90071E445 /* PHAEventStoring.m in Sources */,
 				4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */,
 				4A14E0061DC83FFB0071E445 /* ViewController.m in Sources */,
 				4A14E0031DC83FFB0071E445 /* AppDelegate.m in Sources */,
