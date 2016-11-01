@@ -15,6 +15,7 @@
 		4A14E00E1DC83FFB0071E445 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A14E00C1DC83FFB0071E445 /* LaunchScreen.storyboard */; };
 		4A14E0191DC83FFB0071E445 /* PhunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0181DC83FFB0071E445 /* PhunAppTests.m */; };
 		4A14E0241DC83FFB0071E445 /* PhunAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0231DC83FFB0071E445 /* PhunAppUITests.m */; };
+		4A14E0341DC84D010071E445 /* PHADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0331DC84D010071E445 /* PHADataFetcher.m */; };
 		54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		4A14E01F1DC83FFB0071E445 /* PhunAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhunAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A14E0231DC83FFB0071E445 /* PhunAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhunAppUITests.m; sourceTree = "<group>"; };
 		4A14E0251DC83FFB0071E445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A14E0321DC84D010071E445 /* PHADataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHADataFetcher.h; path = Network/PHADataFetcher.h; sourceTree = "<group>"; };
+		4A14E0331DC84D010071E445 /* PHADataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHADataFetcher.m; path = Network/PHADataFetcher.m; sourceTree = "<group>"; };
 		C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhunApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6E891A30095303C60CED9D /* Pods-PhunApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhunApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhunApp/Pods-PhunApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +111,7 @@
 		4A14DFFD1DC83FFB0071E445 /* PhunApp */ = {
 			isa = PBXGroup;
 			children = (
+				4A14E0311DC84C8F0071E445 /* Network */,
 				4A14E0011DC83FFB0071E445 /* AppDelegate.h */,
 				4A14E0021DC83FFB0071E445 /* AppDelegate.m */,
 				4A14E0041DC83FFB0071E445 /* ViewController.h */,
@@ -145,6 +149,15 @@
 				4A14E0251DC83FFB0071E445 /* Info.plist */,
 			);
 			path = PhunAppUITests;
+			sourceTree = "<group>";
+		};
+		4A14E0311DC84C8F0071E445 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E0321DC84D010071E445 /* PHADataFetcher.h */,
+				4A14E0331DC84D010071E445 /* PHADataFetcher.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		5A8FE5560F6F55DEE2867C64 /* Pods */ = {
@@ -352,6 +365,7 @@
 				4A14E0061DC83FFB0071E445 /* ViewController.m in Sources */,
 				4A14E0031DC83FFB0071E445 /* AppDelegate.m in Sources */,
 				4A14E0001DC83FFB0071E445 /* main.m in Sources */,
+				4A14E0341DC84D010071E445 /* PHADataFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
