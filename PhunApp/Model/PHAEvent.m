@@ -12,7 +12,8 @@
 
 + (NSDateFormatter *)dateFormatter {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"MM dd, yyyy 'at' HH:mm";
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    
     return dateFormatter;
 }
 
@@ -36,7 +37,7 @@
 + (NSValueTransformer *)eventDateJSONTransformer {
     return [MTLValueTransformer transformerUsingForwardBlock:^id(NSString *dateString, BOOL *success,
                                                                  NSError *__autoreleasing *error) {
-        return [self.dateFormatter dateFromString:dateString];
+        return [[self dateFormatter] dateFromString:dateString];
     } reverseBlock:^id(NSDate *date, BOOL *success, NSError *__autoreleasing *error) {
         return [self.dateFormatter stringFromDate:date];
     }];

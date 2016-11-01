@@ -7,11 +7,12 @@
 //
 
 #import <Realm/RLMObject.h>
+#import <Realm/RLMProperty.h>
 #import "PHAEvent.h"
 
 @interface PHAEventStoring : RLMObject
 
-@property (strong, nonatomic) NSNumber *eventID;
+@property (strong, nonatomic) NSNumber <RLMInt>*eventID;
 @property (strong, nonatomic) NSString *eventDescription;
 @property (strong, nonatomic) NSString *eventTitle;
 @property (strong, nonatomic) NSString *imageURL;
