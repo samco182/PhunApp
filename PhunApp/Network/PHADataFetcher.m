@@ -10,7 +10,9 @@
 
 @implementation PHADataFetcher
 
-- (void)getDataFromURL:(NSString *)URLString onSuccess:(void (^)(id responseObject))success{
+- (void)getDataFromURL:(NSString *)URLString
+             onSuccess:(void (^)(PHAEventList *response))success
+               failure:(void (^)(NSError *error))failure {
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -20,10 +22,15 @@
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request
                                                 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                                    if (error) {
-                                                        NSLog(@"Error: %@", error);
+                                                    if (!error) {
+                                                        NSDictionary *responseDictionary = @{@"response" : (NSArray *)responseObject};
+                                                        PHAEventList *list = [MTLJSONAdapter modelOfClass:PHAEventList.class
+                                                                                       fromJSONDictionary:responseDictionary
+                                                                                                    error:&error];
+                                                        success(list);
                                                     } else {
-                                                        success(responseObject);
+                                                        failure(error);
+                                                        // TODO: Add Error Alert
                                                     }
                                                 }];
     [dataTask resume];
