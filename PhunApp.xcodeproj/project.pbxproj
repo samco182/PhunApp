@@ -20,6 +20,8 @@
 		4A14E03B1DC85C370071E445 /* PHAHomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E03A1DC85C370071E445 /* PHAHomeCollectionViewController.m */; };
 		4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E03E1DC85CEA0071E445 /* PHACollectionViewCell.m */; };
 		4A14E0411DC85CEA0071E445 /* PHACollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */; };
+		4A14E0441DC865680071E445 /* PHADetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A14E0431DC865680071E445 /* PHADetailView.storyboard */; };
+		4A14E0471DC8658B0071E445 /* PHADetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0461DC8658B0071E445 /* PHADetailViewController.m */; };
 		54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,9 @@
 		4A14E03D1DC85CEA0071E445 /* PHACollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHACollectionViewCell.h; path = Views/CustomViewCell/PHACollectionViewCell.h; sourceTree = "<group>"; };
 		4A14E03E1DC85CEA0071E445 /* PHACollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHACollectionViewCell.m; path = Views/CustomViewCell/PHACollectionViewCell.m; sourceTree = "<group>"; };
 		4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PHACollectionViewCell.xib; path = Views/CustomViewCell/PHACollectionViewCell.xib; sourceTree = "<group>"; };
+		4A14E0431DC865680071E445 /* PHADetailView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PHADetailView.storyboard; path = Views/DetailView/PHADetailView.storyboard; sourceTree = "<group>"; };
+		4A14E0451DC8658B0071E445 /* PHADetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHADetailViewController.h; path = Views/DetailView/PHADetailViewController.h; sourceTree = "<group>"; };
+		4A14E0461DC8658B0071E445 /* PHADetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHADetailViewController.m; path = Views/DetailView/PHADetailViewController.m; sourceTree = "<group>"; };
 		C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhunApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6E891A30095303C60CED9D /* Pods-PhunApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhunApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhunApp/Pods-PhunApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +179,7 @@
 		4A14E0351DC85B870071E445 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A14E0421DC865440071E445 /* DetailView */,
 				4A14E03C1DC85C9F0071E445 /* CustomViewCell */,
 				4A14E0361DC85BBF0071E445 /* Home */,
 			);
@@ -198,6 +204,16 @@
 				4A14E03F1DC85CEA0071E445 /* PHACollectionViewCell.xib */,
 			);
 			name = CustomViewCell;
+			sourceTree = "<group>";
+		};
+		4A14E0421DC865440071E445 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E0451DC8658B0071E445 /* PHADetailViewController.h */,
+				4A14E0461DC8658B0071E445 /* PHADetailViewController.m */,
+				4A14E0431DC865680071E445 /* PHADetailView.storyboard */,
+			);
+			name = DetailView;
 			sourceTree = "<group>";
 		};
 		5A8FE5560F6F55DEE2867C64 /* Pods */ = {
@@ -327,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A14E0441DC865680071E445 /* PHADetailView.storyboard in Resources */,
 				4A14E0411DC85CEA0071E445 /* PHACollectionViewCell.xib in Resources */,
 				4A14E00E1DC83FFB0071E445 /* LaunchScreen.storyboard in Resources */,
 				4A14E00B1DC83FFB0071E445 /* Assets.xcassets in Resources */,
@@ -407,6 +424,7 @@
 				4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */,
 				4A14E0061DC83FFB0071E445 /* ViewController.m in Sources */,
 				4A14E0031DC83FFB0071E445 /* AppDelegate.m in Sources */,
+				4A14E0471DC8658B0071E445 /* PHADetailViewController.m in Sources */,
 				4A14E03B1DC85C370071E445 /* PHAHomeCollectionViewController.m in Sources */,
 				4A14E0001DC83FFB0071E445 /* main.m in Sources */,
 				4A14E0341DC84D010071E445 /* PHADataFetcher.m in Sources */,
