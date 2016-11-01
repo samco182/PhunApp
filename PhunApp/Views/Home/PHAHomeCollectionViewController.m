@@ -30,7 +30,7 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.itemsPerRow = [self getItemsPerRow];
+    [self getItemsPerRow];
 
     [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
 
@@ -43,6 +43,8 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [self.navigationController.navigationBar setBackgroundImage:nil
+                                                  forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -76,7 +78,7 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
     PHACollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     PHAEventStoring *event = [self.events objectAtIndex:indexPath.row];
-    [cell.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:event.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:event.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder_nomoon"]];
     cell.titleTextLabel.text = event.eventTitle;
     cell.dateTextLabel.text = [[self dateFormatter] stringFromDate:event.eventDate];
     cell.shortDescriptionTextLabel.text = [([event.eventDescription componentsSeparatedByString:@"."])[0] stringByAppendingString:@"."];
@@ -96,7 +98,7 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
                   layout:(nonnull UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    CGFloat widthPerItem = self.view.frame.size.width / self.itemsPerRow;
+    CGFloat widthPerItem = self.collectionView.frame.size.width / self.itemsPerRow;
     
     return CGSizeMake(widthPerItem, widthPerItem * 0.45);
 }
@@ -130,15 +132,23 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [self.collectionView reloadData];
 }
 
-- (CGFloat)getItemsPerRow {
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+- (void)getItemsPerRow {
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;\
     
-    if (orientation == UIInterfaceOrientationPortrait) {
-        self.itemsPerRow = 1;
-    } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-        self.itemsPerRow = 2;
+    UIDevice* thisDevice = [UIDevice currentDevice];
+    if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        if (orientation == UIInterfaceOrientationPortrait) {
+            self.itemsPerRow = 2;
+        } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
+            self.itemsPerRow = 2;
+        }
+    } else if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        if (orientation == UIInterfaceOrientationPortrait) {
+            self.itemsPerRow = 1;
+        } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
+            self.itemsPerRow = 2;
+        }
     }
-    return self.itemsPerRow;
 }
 
 - (void)startFetchingDataToDisplay {

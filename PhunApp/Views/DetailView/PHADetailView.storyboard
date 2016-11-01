@@ -58,6 +58,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gDg-N4-BZk" secondAttribute="bottom" constant="20" symbolic="YES" id="028-44-s5D"/>
                                             <constraint firstItem="gDg-N4-BZk" firstAttribute="leading" secondItem="T9L-ps-SLo" secondAttribute="leading" id="6xb-rp-dUF"/>
+                                            <constraint firstAttribute="trailing" secondItem="T9L-ps-SLo" secondAttribute="trailing" constant="20" symbolic="YES" id="9kK-gN-aVc"/>
                                             <constraint firstItem="gDg-N4-BZk" firstAttribute="top" secondItem="T9L-ps-SLo" secondAttribute="bottom" constant="8" id="ABE-Xo-MrG"/>
                                             <constraint firstItem="bLI-CR-XWz" firstAttribute="leading" secondItem="Ndk-Gt-dkM" secondAttribute="leading" id="G9p-cd-llz"/>
                                             <constraint firstItem="CTh-kP-44z" firstAttribute="leading" secondItem="Ndk-Gt-dkM" secondAttribute="leading" constant="20" symbolic="YES" id="GBR-ih-A5G"/>
@@ -95,7 +96,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="TCl-fv-jCF">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="qfX-Vo-DlU">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="shareButton:" destination="X6T-qh-SS9" id="oGF-2D-CMB"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -104,6 +108,7 @@
                         <outlet property="gradientImageView" destination="8kJ-Wd-RdK" id="ET5-bp-IY7"/>
                         <outlet property="imageView" destination="bLI-CR-XWz" id="2MU-vo-73H"/>
                         <outlet property="nagivationItem" destination="TCl-fv-jCF" id="Tjg-5W-SsA"/>
+                        <outlet property="shareButton" destination="qfX-Vo-DlU" id="AQv-FQ-6e9"/>
                         <outlet property="titleTextLabel" destination="T9L-ps-SLo" id="FG5-ig-IkY"/>
                     </connections>
                 </viewController>

@@ -27,34 +27,38 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-mq-Caf">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-mq-Caf">
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="u3R-mq-Caf" firstAttribute="width" secondItem="uVF-jU-SO0" secondAttribute="width" id="5Gj-qY-UKe"/>
+                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMD-x8-rCQ">
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="UI8-jB-sBU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="UI8-jB-sBU">
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="UI8-jB-sBU" firstAttribute="width" secondItem="v2Z-DE-5jk" secondAttribute="width" id="Mhp-ns-hdU"/>
                                     <constraint firstItem="uVF-jU-SO0" firstAttribute="width" secondItem="v2Z-DE-5jk" secondAttribute="width" id="n5e-jU-8DY"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="v2Z-DE-5jk" secondAttribute="bottom" constant="30" id="IuZ-oY-S5T"/>
+                            <constraint firstAttribute="bottom" secondItem="v2Z-DE-5jk" secondAttribute="bottom" constant="20" id="IuZ-oY-S5T"/>
                             <constraint firstAttribute="trailing" secondItem="v2Z-DE-5jk" secondAttribute="trailing" constant="20" symbolic="YES" id="QFz-IG-rbQ"/>
-                            <constraint firstItem="v2Z-DE-5jk" firstAttribute="top" secondItem="ZBu-DV-j7G" secondAttribute="top" constant="30" id="QKl-EZ-5pL"/>
+                            <constraint firstItem="v2Z-DE-5jk" firstAttribute="top" secondItem="ZBu-DV-j7G" secondAttribute="top" constant="25" id="QKl-EZ-5pL"/>
                             <constraint firstItem="v2Z-DE-5jk" firstAttribute="leading" secondItem="ZBu-DV-j7G" secondAttribute="leading" constant="20" symbolic="YES" id="bt6-hI-DCN"/>
                         </constraints>
                     </view>

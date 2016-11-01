@@ -9,7 +9,7 @@
 #import "PHADetailViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface PHADetailViewController ()
+@interface PHADetailViewController () <UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UINavigationItem *nagivationItem;
 @property (weak, nonatomic) IBOutlet UIImageView *gradientImageView;
@@ -50,11 +50,11 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)applyGradientToImageView {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.eventToDisplay.imageURL]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.eventToDisplay.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder_nomoon"]];
     
     CAGradientLayer *layer = [CAGradientLayer layer];
     layer.frame = self.imageView.frame;
@@ -84,5 +84,38 @@
     
     return dateFormatter;
 }
+
+- (IBAction)shareButton:(UIBarButtonItem *)sender {
+    NSString *textToShare = [NSString stringWithFormat:@"Attend to event: %@", self.eventToDisplay.eventTitle];
+    NSString *eventDate = [[self dateFormatter] stringFromDate:self.eventToDisplay.eventDate];
+    NSURL *myWebsite = self.eventToDisplay.imageURL ? [NSURL URLWithString:self.eventToDisplay.imageURL] : [NSURL URLWithString:@"placeholder_nomoon"];
+    
+    NSArray *objectsToShare = @[textToShare, myWebsite, eventDate];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    activityVC.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:activityVC animated:YES completion:nil];
+    
+    UIPopoverPresentationController* pp = activityVC.popoverPresentationController;
+    pp.barButtonItem = sender;
+}
+
+#pragma mark - UIPopoverControllerDelegate
+
+//-(void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view
+//{
+//    
+//}
+
 
 @end
