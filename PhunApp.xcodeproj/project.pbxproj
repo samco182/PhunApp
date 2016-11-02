@@ -25,6 +25,9 @@
 		4A14E04B1DC875200071E445 /* PHAEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E04A1DC875200071E445 /* PHAEvent.m */; };
 		4A14E04E1DC87F660071E445 /* PHAEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E04D1DC87F660071E445 /* PHAEventList.m */; };
 		4A14E0511DC899A90071E445 /* PHAEventStoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0501DC899A90071E445 /* PHAEventStoring.m */; };
+		4A14E0531DC95F070071E445 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A14E0521DC95F070071E445 /* CoreSpotlight.framework */; };
+		4A14E0551DC95F130071E445 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A14E0541DC95F130071E445 /* MobileCoreServices.framework */; };
+		4A14E05A1DC95F6E0071E445 /* PHASpotlightHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14E0591DC95F6E0071E445 /* PHASpotlightHelper.m */; };
 		54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,10 @@
 		4A14E04D1DC87F660071E445 /* PHAEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAEventList.m; path = Model/PHAEventList.m; sourceTree = "<group>"; };
 		4A14E04F1DC899A90071E445 /* PHAEventStoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHAEventStoring.h; path = Model/PHAEventStoring.h; sourceTree = "<group>"; };
 		4A14E0501DC899A90071E445 /* PHAEventStoring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHAEventStoring.m; path = Model/PHAEventStoring.m; sourceTree = "<group>"; };
+		4A14E0521DC95F070071E445 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
+		4A14E0541DC95F130071E445 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4A14E0581DC95F6E0071E445 /* PHASpotlightHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHASpotlightHelper.h; sourceTree = "<group>"; };
+		4A14E0591DC95F6E0071E445 /* PHASpotlightHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHASpotlightHelper.m; sourceTree = "<group>"; };
 		C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhunApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6E891A30095303C60CED9D /* Pods-PhunApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhunApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhunApp/Pods-PhunApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A14E0551DC95F130071E445 /* MobileCoreServices.framework in Frameworks */,
+				4A14E0531DC95F070071E445 /* CoreSpotlight.framework in Frameworks */,
 				54A85D2759C9C302C0E53264 /* Pods_PhunApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +144,7 @@
 		4A14DFFD1DC83FFB0071E445 /* PhunApp */ = {
 			isa = PBXGroup;
 			children = (
+				4A14E0571DC95F570071E445 /* Utils */,
 				4A14E0481DC874CE0071E445 /* Model */,
 				4A14E0351DC85B870071E445 /* Views */,
 				4A14E0311DC84C8F0071E445 /* Network */,
@@ -239,6 +249,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		4A14E0571DC95F570071E445 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4A14E0581DC95F6E0071E445 /* PHASpotlightHelper.h */,
+				4A14E0591DC95F6E0071E445 /* PHASpotlightHelper.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5A8FE5560F6F55DEE2867C64 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +270,8 @@
 		C783DAF8E2C15C5571CBA0E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A14E0541DC95F130071E445 /* MobileCoreServices.framework */,
+				4A14E0521DC95F070071E445 /* CoreSpotlight.framework */,
 				C608D16B246A159B0C9CEFE7 /* Pods_PhunApp.framework */,
 			);
 			name = Frameworks;
@@ -448,6 +469,7 @@
 				4A14E0511DC899A90071E445 /* PHAEventStoring.m in Sources */,
 				4A14E0401DC85CEA0071E445 /* PHACollectionViewCell.m in Sources */,
 				4A14E0061DC83FFB0071E445 /* ViewController.m in Sources */,
+				4A14E05A1DC95F6E0071E445 /* PHASpotlightHelper.m in Sources */,
 				4A14E0031DC83FFB0071E445 /* AppDelegate.m in Sources */,
 				4A14E0471DC8658B0071E445 /* PHADetailViewController.m in Sources */,
 				4A14E04E1DC87F660071E445 /* PHAEventList.m in Sources */,

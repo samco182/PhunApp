@@ -12,6 +12,7 @@
 #import "PHAHomeCollectionViewController.h"
 #import "PHACollectionViewCell.h"
 #import "PHADetailViewController.h"
+#import "PHASpotlightHelper.h"
 #import "PHADataFetcher.h"
 #import "PHAEventStoring.h"
 #import "PHAEvent.h"
@@ -20,6 +21,7 @@
 
 @property (nonatomic) CGFloat itemsPerRow;
 @property (strong, nonatomic) PHADataFetcher *dataFetcher;
+@property (strong, nonatomic) PHASpotlightHelper *helper;
 @property (strong, nonatomic) RLMResults *events;
 
 @end
@@ -30,11 +32,16 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getItemsPerRow];
-
-    [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
-
-    [self startFetchingDataToDisplay];
+    if (self.spotlightItemID) {
+        PHAEventStoring *event =  [PHAEventStoring objectForPrimaryKey:self.spotlightItemID];
+        [self performSegueWithIdentifier:@"Show Details" sender:event];
+    } else {
+        [self refreshItemsPerRow];
+        
+        [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
+        
+        [self startFetchingDataToDisplay];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -43,6 +50,8 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    
+    [self refreshItemsPerRow];
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
 }
@@ -54,13 +63,26 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
                                                  object:nil];
 }
 
-#pragma mark - Getters
+#pragma mark - Setter/Getters
 
 - (PHADataFetcher *)dataFetcher {
     if (!_dataFetcher) {
         _dataFetcher = [PHADataFetcher new];
     }
     return _dataFetcher;
+}
+
+- (PHASpotlightHelper *)helper {
+    if (!_helper) {
+        _helper = [PHASpotlightHelper new];
+    }
+    return _helper;
+}
+
+- (void)setSpotlightItemID:(NSString *)spotlightItemID {
+    _spotlightItemID = spotlightItemID;
+    PHAEventStoring *event =  [PHAEventStoring objectForPrimaryKey:@([spotlightItemID integerValue])];
+    [self performSegueWithIdentifier:@"Show Details" sender:event];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -128,11 +150,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
-    [self getItemsPerRow];
-    [self.collectionView reloadData];
+    [self refreshItemsPerRow];
 }
 
-- (void)getItemsPerRow {
+- (void)refreshItemsPerRow {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;\
     
     UIDevice* thisDevice = [UIDevice currentDevice];
@@ -149,6 +170,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             self.itemsPerRow = 2;
         }
     }
+    [self.collectionView reloadData];
 }
 
 - (void)startFetchingDataToDisplay {
@@ -174,6 +196,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                            RLMRealm *realmMainThread = [RLMRealm defaultRealm];
                                            RLMResults *events = [PHAEventStoring allObjectsInRealm:realmMainThread];
                                            self.events = events;
+                                           [self.helper indexIntoSpotlight:self.events];
                                            [self.collectionView reloadData];
                                        });
                                    }
@@ -181,6 +204,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                            } failure:^(NSError *error) {
                                NSLog(@"ERROR: %@",error);
                                self.events = [PHAEventStoring allObjects];
+                               [self.helper indexIntoSpotlight:self.events];
                                [self.collectionView reloadData];
                            }];
 }
@@ -188,18 +212,15 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - Navigation
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *tappedCell = [collectionView cellForItemAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"Show Details" sender:tappedCell];
+    [self performSegueWithIdentifier:@"Show Details" sender:self.events[indexPath.row]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([sender isKindOfClass:[PHACollectionViewCell class]]) {
-        NSIndexPath *selectedCell = [self.collectionView indexPathForCell:sender];
+
         if ([segue.destinationViewController isKindOfClass:[PHADetailViewController class]]) {
             PHADetailViewController *detailViewController = (PHADetailViewController *)segue.destinationViewController;
-            detailViewController.eventToDisplay = [self.events objectAtIndex:selectedCell.row];
+            detailViewController.eventToDisplay = sender;
         }
-    }
 }
 
 @end

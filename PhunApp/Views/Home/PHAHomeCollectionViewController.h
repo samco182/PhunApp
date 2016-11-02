@@ -10,4 +10,6 @@
 
 @interface PHAHomeCollectionViewController : UICollectionViewController
 
+@property (strong, nonatomic) NSString *spotlightItemID;
+
 @end

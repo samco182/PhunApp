@@ -108,7 +108,6 @@
                         <outlet property="gradientImageView" destination="8kJ-Wd-RdK" id="ET5-bp-IY7"/>
                         <outlet property="imageView" destination="bLI-CR-XWz" id="2MU-vo-73H"/>
                         <outlet property="nagivationItem" destination="TCl-fv-jCF" id="Tjg-5W-SsA"/>
-                        <outlet property="shareButton" destination="qfX-Vo-DlU" id="AQv-FQ-6e9"/>
                         <outlet property="titleTextLabel" destination="T9L-ps-SLo" id="FG5-ig-IkY"/>
                     </connections>
                 </viewController>

@@ -10,6 +10,10 @@
 
 @implementation PHAEventStoring
 
++ (NSString *)primaryKey {
+    return @"eventID";
+}
+
 - (id)initWithMantleModel:(PHAEvent *)eventModel {
     self = [super init];
     

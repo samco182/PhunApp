@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "PHAHomeCollectionViewController.h"
+#import <CoreSpotlight/CoreSpotlight.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
     return YES;
 }
 
@@ -45,6 +49,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    if ([userActivity.activityType isEqualToString:CSSearchableItemActionType]) {
+        UINavigationController *controller = (UINavigationController *)self.window.rootViewController;
+        PHAHomeCollectionViewController *rootController = controller.viewControllers.firstObject;
+        rootController.spotlightItemID = [userActivity.userInfo objectForKey:CSSearchableItemActivityIdentifier];
+    }
+    return YES;
 }
 
 
