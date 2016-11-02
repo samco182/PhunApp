@@ -64,7 +64,9 @@
     if ([url.scheme isEqualToString:@"phunapp"]) {
         UINavigationController *controller = (UINavigationController *)self.window.rootViewController;
         PHAHomeCollectionViewController *rootController = controller.viewControllers.firstObject;
-        rootController.deepLinkingItemID = ([url.relativePath componentsSeparatedByString:@"="])[1];
+        NSString *string = ([url.absoluteString componentsSeparatedByString:@"?"])[1];
+        NSString *formattedString = ([string componentsSeparatedByString:@"="])[1];
+        rootController.deepLinkingItemID = formattedString;
     }
     
     return YES;

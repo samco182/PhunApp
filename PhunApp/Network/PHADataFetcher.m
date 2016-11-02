@@ -30,7 +30,6 @@
                                                         success(list);
                                                     } else {
                                                         failure(error);
-                                                        // TODO: Add Error Alert
                                                     }
                                                 }];
     [dataTask resume];

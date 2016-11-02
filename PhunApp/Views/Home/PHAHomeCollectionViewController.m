@@ -30,11 +30,13 @@
 @implementation PHAHomeCollectionViewController
 
 static NSString * const reuseIdentifier = @"Meeting Cell";
+static NSString *const FEED_URL = @"https://raw.githubusercontent.com/phunware/dev-interview-homework/master/feed.json";
+static NSString *const DETAIL_SEGUE = @"Show Details";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
     
     [self refreshItemsPerRow];
     [self startFetchingDataToDisplay];
@@ -123,7 +125,7 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
     
     CGFloat widthPerItem = self.collectionView.frame.size.width / self.itemsPerRow;
     
-    return CGSizeMake(widthPerItem, widthPerItem * 0.45);
+    return CGSizeMake(widthPerItem, widthPerItem * 0.48);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
@@ -144,7 +146,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 - (void)startFetchingDataToDisplay {
     [self setupActivityIndicator];
-    [self.dataFetcher getDataFromURL:@"https://raw.githubusercontent.com/phunware/dev-interview-homework/master/feed.json"
+    [self.dataFetcher getDataFromURL:FEED_URL
                            onSuccess:^(PHAEventList *response) {
                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                    @autoreleasepool {
@@ -172,7 +174,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                    }
                                });
                            } failure:^(NSError *error) {
-                               NSLog(@"ERROR: %@",error);
+                               [self alert:error];
                                self.events = [PHAEventStoring allObjects];
                                [self.helper indexIntoSpotlight:self.events];
                                [self.collectionView reloadData];
@@ -182,7 +184,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - Navigation
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"Show Details" sender:self.events[indexPath.row]];
+    [self performSegueWithIdentifier:DETAIL_SEGUE sender:self.events[indexPath.row]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -228,7 +230,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.indicator.frame = CGRectMake((rect.size.width-50)/2, (rect.size.height-50)/2, 50, 50);
     self.indicator.hidesWhenStopped = YES;
-    self.indicator.backgroundColor = [UIColor blackColor];
+    self.indicator.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.indicator];
     
     [self.indicator startAnimating];
@@ -236,7 +238,17 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 - (void)forwardToDetailEventID:(NSString *)eventID {
     PHAEventStoring *event = [PHAEventStoring objectForPrimaryKey:@([eventID integerValue])];
-    [self performSegueWithIdentifier:@"Show Details" sender:event];
+    [self performSegueWithIdentifier:DETAIL_SEGUE sender:event];
+}
+
+- (void)alert:(NSError *)msg
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                             message:[msg localizedDescription]
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:ok];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

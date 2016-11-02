@@ -31,16 +31,6 @@
     [self fillUpTextFields];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - UI
 
 - (void)makeNavigationBarTransparent {
@@ -109,13 +99,5 @@
     UIPopoverPresentationController* pp = activityVC.popoverPresentationController;
     pp.barButtonItem = sender;
 }
-
-#pragma mark - UIPopoverControllerDelegate
-
-//-(void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view
-//{
-//    
-//}
-
 
 @end
