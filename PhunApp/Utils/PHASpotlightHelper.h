@@ -10,6 +10,7 @@
 #import <Realm/RLMResults.h>
 #import "PHAEventStoring.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+
 @import CoreSpotlight;
 
 @interface PHASpotlightHelper : NSObject

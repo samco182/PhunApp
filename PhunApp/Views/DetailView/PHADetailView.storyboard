@@ -29,7 +29,7 @@
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1O-8F-zva">
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8kJ-Wd-RdK"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8kJ-Wd-RdK"/>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="8kJ-Wd-RdK" firstAttribute="leading" secondItem="Z1O-8F-zva" secondAttribute="leading" id="1Yx-DA-iX3"/>
