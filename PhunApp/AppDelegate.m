@@ -60,5 +60,15 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([url.scheme isEqualToString:@"phunapp"]) {
+        UINavigationController *controller = (UINavigationController *)self.window.rootViewController;
+        PHAHomeCollectionViewController *rootController = controller.viewControllers.firstObject;
+        rootController.deepLinkingItemID = ([url.relativePath componentsSeparatedByString:@"="])[1];
+    }
+    
+    return YES;
+}
+
 
 @end

@@ -32,16 +32,12 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.spotlightItemID) {
-        PHAEventStoring *event =  [PHAEventStoring objectForPrimaryKey:self.spotlightItemID];
-        [self performSegueWithIdentifier:@"Show Details" sender:event];
-    } else {
-        [self refreshItemsPerRow];
-        
-        [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
-        
-        [self startFetchingDataToDisplay];
-    }
+    
+    [self refreshItemsPerRow];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
+    
+    [self startFetchingDataToDisplay];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,6 +78,12 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 - (void)setSpotlightItemID:(NSString *)spotlightItemID {
     _spotlightItemID = spotlightItemID;
     PHAEventStoring *event =  [PHAEventStoring objectForPrimaryKey:@([spotlightItemID integerValue])];
+    [self performSegueWithIdentifier:@"Show Details" sender:event];
+}
+
+- (void)setDeepLinkingItemID:(NSString *)deepLinkingItemID {
+    _deepLinkingItemID = deepLinkingItemID;
+    PHAEventStoring *event = [PHAEventStoring objectForPrimaryKey:@([deepLinkingItemID integerValue])];
     [self performSegueWithIdentifier:@"Show Details" sender:event];
 }
 

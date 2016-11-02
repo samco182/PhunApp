@@ -25,19 +25,12 @@
         itemAttributes.title = event.eventTitle;
         itemAttributes.contentDescription= event.eventDescription;
         
-        //UIImage *image = [[SDImageCache sharedImageCache] :event.imageURL];
-        
-//        if (image) {
-//            itemAttributes.thumbnailData = UIImageJPEGRepresentation(image,1.0);
-//        }
-        
         CSSearchableItem* item = [[CSSearchableItem alloc] initWithUniqueIdentifier:event.eventID.stringValue domainIdentifier:@"Event Spotilight Item" attributeSet:itemAttributes];
         [spotlightItems addObject:item];
     }
     
     // Add the item to the on-device index.
     [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:spotlightItems completionHandler:^(NSError * _Nullable error) {
-        
         if (!error) {
             NSLog(@"Items idenxed",nil);
         }else{
