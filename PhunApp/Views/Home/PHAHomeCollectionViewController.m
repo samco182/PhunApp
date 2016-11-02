@@ -23,6 +23,7 @@
 @property (strong, nonatomic) PHADataFetcher *dataFetcher;
 @property (strong, nonatomic) PHASpotlightHelper *helper;
 @property (strong, nonatomic) RLMResults *events;
+@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 
 @end
 
@@ -33,10 +34,9 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self refreshItemsPerRow];
-    
     [self.collectionView registerNib:[UINib nibWithNibName:@"PHACollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"Meeting Cell"];
     
+    [self refreshItemsPerRow];
     [self startFetchingDataToDisplay];
 }
 
@@ -47,9 +47,10 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
     
-    [self refreshItemsPerRow];
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
+    
+    [self refreshItemsPerRow];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -77,22 +78,15 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
 
 - (void)setSpotlightItemID:(NSString *)spotlightItemID {
     _spotlightItemID = spotlightItemID;
-    PHAEventStoring *event =  [PHAEventStoring objectForPrimaryKey:@([spotlightItemID integerValue])];
-    [self performSegueWithIdentifier:@"Show Details" sender:event];
+    [self forwardToDetailEventID:spotlightItemID];
 }
 
 - (void)setDeepLinkingItemID:(NSString *)deepLinkingItemID {
     _deepLinkingItemID = deepLinkingItemID;
-    PHAEventStoring *event = [PHAEventStoring objectForPrimaryKey:@([deepLinkingItemID integerValue])];
-    [self performSegueWithIdentifier:@"Show Details" sender:event];
+    [self forwardToDetailEventID:deepLinkingItemID];
 }
 
 #pragma mark <UICollectionViewDataSource>
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.events.count;
@@ -102,7 +96,13 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
     PHACollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     PHAEventStoring *event = [self.events objectAtIndex:indexPath.row];
-    [cell.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:event.imageURL] placeholderImage:[UIImage imageNamed:@"placeholder_nomoon"]];
+    [cell.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:event.imageURL]
+                                placeholderImage:[UIImage imageNamed:@"placeholder_nomoon"]
+                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                           if (indexPath.row == ([self.events count]-1)) {
+                                               [self.indicator stopAnimating];
+                                           }
+                                       }];
     cell.titleTextLabel.text = event.eventTitle;
     cell.dateTextLabel.text = [[self dateFormatter] stringFromDate:event.eventDate];
     cell.shortDescriptionTextLabel.text = [([event.eventDescription componentsSeparatedByString:@"."])[0] stringByAppendingString:@"."];
@@ -111,7 +111,6 @@ static NSString * const reuseIdentifier = @"Meeting Cell";
     } else {
         cell.meetingPlaceTextLabel.text = event.locationOne;
     }
-    
     
     return cell;
 }
@@ -141,41 +140,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsZero.left;
 }
 
-#pragma mark - Helper Methods
-
-- (NSDateFormatter *)dateFormatter {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm a"];;
-    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-    
-    return dateFormatter;
-}
-
-- (void)orientationChanged:(NSNotification *)notification {
-    [self refreshItemsPerRow];
-}
-
-- (void)refreshItemsPerRow {
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;\
-    
-    UIDevice* thisDevice = [UIDevice currentDevice];
-    if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        if (orientation == UIInterfaceOrientationPortrait) {
-            self.itemsPerRow = 2;
-        } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-            self.itemsPerRow = 2;
-        }
-    } else if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if (orientation == UIInterfaceOrientationPortrait) {
-            self.itemsPerRow = 1;
-        } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-            self.itemsPerRow = 2;
-        }
-    }
-    [self.collectionView reloadData];
-}
+#pragma mark - Fetching
 
 - (void)startFetchingDataToDisplay {
+    [self setupActivityIndicator];
     [self.dataFetcher getDataFromURL:@"https://raw.githubusercontent.com/phunware/dev-interview-homework/master/feed.json"
                            onSuccess:^(PHAEventList *response) {
                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -223,6 +191,52 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             PHADetailViewController *detailViewController = (PHADetailViewController *)segue.destinationViewController;
             detailViewController.eventToDisplay = sender;
         }
+}
+
+#pragma mark - Helper Methods
+
+- (NSDateFormatter *)dateFormatter {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy 'at' hh:mm a"];;
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    
+    return dateFormatter;
+}
+
+- (void)orientationChanged:(NSNotification *)notification {
+    [self refreshItemsPerRow];
+}
+
+- (void)refreshItemsPerRow {
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;\
+    
+    UIDevice* thisDevice = [UIDevice currentDevice];
+    if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        self.itemsPerRow = 2;
+    } else if (thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        if (orientation == UIInterfaceOrientationPortrait) {
+            self.itemsPerRow = 1;
+        } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
+            self.itemsPerRow = 2;
+        }
+    }
+    [self.collectionView reloadData];
+}
+
+- (void)setupActivityIndicator {
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.indicator.frame = CGRectMake((rect.size.width-50)/2, (rect.size.height-50)/2, 50, 50);
+    self.indicator.hidesWhenStopped = YES;
+    self.indicator.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.indicator];
+    
+    [self.indicator startAnimating];
+}
+
+- (void)forwardToDetailEventID:(NSString *)eventID {
+    PHAEventStoring *event = [PHAEventStoring objectForPrimaryKey:@([eventID integerValue])];
+    [self performSegueWithIdentifier:@"Show Details" sender:event];
 }
 
 @end
